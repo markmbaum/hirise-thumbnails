@@ -37,7 +37,7 @@ else:
 # FUNCTIONS
 
 def download_page(url):
-    r = requests.get(url)
+    r = requests.get(url, timeout=10)
     c = r.content.decode(r.encoding)
     return(c)
 
