@@ -1,5 +1,7 @@
 # %%
 
+from sys import argv
+import bs4
 from bs4 import BeautifulSoup
 from os import mkdir
 from os.path import join, basename
@@ -26,7 +28,10 @@ total_pages = 3049
 urlimage = 'https://www.uahirise.org/'
 
 #number of processes
-nprocs = 6
+if len(argv) < 2:
+    nprocs = 4
+else:
+    nprocs = int(argv[1])
 
 # %%
 # FUNCTIONS
@@ -52,7 +57,10 @@ def get_text(tag):
     if tag is None:
         return('')
     else:
-        return(fmt(tag.text))
+        if isinstance(tag, bs4.element.Tag):
+           return(fmt(tag.text))
+        elif isinstance(tag, bs4.element.NavigableString):
+            return(fmt(tag.string))
 
 def get_title(soup):
     title = soup.find('span', class_='observation-title-milo')
