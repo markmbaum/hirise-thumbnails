@@ -53,4 +53,5 @@ for k in meta:
 
 with open(fnout, 'w') as ofile:
     json.dump(meta, ofile, ensure_ascii=True, indent=True)
+print('file written:', fnout)
 # %%

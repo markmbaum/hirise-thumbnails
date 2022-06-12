@@ -54,16 +54,32 @@ def get_text(tag):
     else:
         return(fmt(tag.text))
 
+def get_title(soup):
+    title = soup.find('span', class_='observation-title-milo')
+    if title:
+        return(fmt(title.text))
+    return('')
+
+def get_caption(soup):
+    cap = soup.find('div', class_='caption-text')
+    if cap:
+        return(fmt(cap.text))
+    cap = soup.find('div', class_='caption-text-no-extras')
+    if cap:
+        return(fmt(cap.text)) 
+    return('')
+
 def scrape_image_page(url):
+    print('scraping:', url)
     #soup the image information page
     soup = soup_page(url)
     #take the image title
-    title = get_text(soup.find('span', class_='observation-title-milo'))
+    title = get_title(soup)
     #take the caption
-    caption = get_text(soup.find('div', class_='caption-text'))
+    caption = get_caption(soup)
     #pick apart the left column of the metadata table
     els = soup.find('td', class_='product-text-alpha')
-    if els is not None:
+    if title and els is not None:
         els = els.contents
         els = [get_text(el) for el in els if get_text(el)]
         meta = {els[i]: els[i+1] for i in range(0,24,2)}
