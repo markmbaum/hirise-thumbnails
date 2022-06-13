@@ -1,0 +1,4 @@
+HIRISE thumbnail images
+    University of Arizona Lunar & Planetary Laboratory
+    non-captioned images are from the main catalog: https://www.uahirise.org/catalog/
+    captioned images are found here: https://www.uahirise.org/catalog/captions/
